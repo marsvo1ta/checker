@@ -36,7 +36,7 @@ jobs:
 
     - name: Parse and send test results to Telegram
       run: |
-        python parse_results.py  # Run your Python script to parse results
+        python parse/parse_results.py  # Run your Python script to parse results
         cat test_results.txt     # Print the parsed results
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

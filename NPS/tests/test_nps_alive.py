@@ -1,5 +1,5 @@
 import requests as r
-from data.credentials import *
+from ...data.credentials import *
 
 
 def test_alive():

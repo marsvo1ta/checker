@@ -38,6 +38,7 @@ jobs:
       run: |
         python parse/parse_results.py  # Run your Python script to parse results
         cat test_results.txt     # Print the parsed results
+        echo "::set-output name=results::$(cat test_results.txt)"  # Set an output for the step
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -50,4 +51,4 @@ jobs:
         message: |
           GitHub Actions: Website checker completed.
           Test Results:
-          $(cat test_results.txt)
+          ${{ steps.parse_and_send.outputs.results }}  # Use the output from the previous step

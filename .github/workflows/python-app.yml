@@ -35,6 +35,7 @@ jobs:
       run: pytest -n auto --junitxml=results.xml
 
     - name: Parse and send test results to Telegram
+      id: parse_and_send  # Add an ID to the step
       run: |
         python parse/parse_results.py  # Run your Python script to parse results
         cat test_results.txt     # Print the parsed results

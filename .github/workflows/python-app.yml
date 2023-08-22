@@ -11,6 +11,9 @@ jobs:
   check-website:
     runs-on: ubuntu-latest
 
+    env:
+      NPS_URL_PROD: ${{ secrets.NPS_URL_PROD }}  # Use the secret here
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2

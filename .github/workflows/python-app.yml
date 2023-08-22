@@ -35,11 +35,9 @@ jobs:
       run: pytest -n auto --junitxml=results.xml
 
     - name: Parse and send test results to Telegram
-      id: parse_and_send  # Add an ID to the step
       run: |
         python parse/parse_results.py  # Run your Python script to parse results
-        cat parse/test_results.txt     # Print the parsed results
-        echo "::set-output name=results::$(cat test_results.txt)"  # Set an output for the step
+        cat test_results.txt     # Print the parsed results
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -52,4 +50,4 @@ jobs:
         message: |
           GitHub Actions: Website checker completed.
           Test Results:
-          ${{ steps.parse_and_send.outputs.results }}  # Use the output from the previous step
+          $(cat parse/test_results.txt)  # Use the direct path to test_results.txt

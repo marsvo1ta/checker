@@ -38,7 +38,7 @@ jobs:
       id: parse_and_send  # Add an ID to the step
       run: |
         python parse/parse_results.py  # Run your Python script to parse results
-        cat test_results.txt     # Print the parsed results
+        cat parse/test_results.txt     # Print the parsed results
         echo "::set-output name=results::$(cat test_results.txt)"  # Set an output for the step
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

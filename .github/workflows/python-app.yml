@@ -12,7 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NPS_URL_PROD: ${{ secrets.NPS_URL_PROD }}  # Use the secret here
+      NPS_URL_PROD: ${{ secrets.NPS_URL_PROD }}
+      NPG_URL_PROD: ${{ secrets.NPG_URL_PROD}}
+      NPG_URL_STAGE: ${{ secrets.NPG_URL_STAGE}}
+      NPG_ADMIN_EMAIL: ${{ secrets.NPG_ADMIN_EMAIL}}
+      NPG_ADMIN_PASS: ${{ secrets.NPG_ADMIN_PASS}}
 
     steps:
     - name: Checkout repository

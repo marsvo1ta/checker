@@ -1,8 +1,8 @@
-import requests as r
-from data.credentials import *
+from basecase import BaseCase
+from data.credentials import NPS_URL_PROD
 
 
-def test_alive():
-    response = r.get(NPS_URL_PROD)
-    assert response.status_code == 200
-    
+class TestNPSAlive(BaseCase):
+    def test_get_nps_url(self):
+        response = self.get(NPS_URL_PROD)
+        self.assertEqual(response.status_code, 200)

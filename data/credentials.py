@@ -7,6 +7,5 @@ NPG_ADMIN_EMAIL = os.environ.get('NPG_ADMIN_EMAIL')
 NPG_ADMIN_PASS = os.environ.get('NPG_ADMIN_PASS')
 
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
-
-TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_CHAT_ID')
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 

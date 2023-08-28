@@ -41,6 +41,8 @@ jobs:
       run: pytest -rA | tee test_results.txt
 
     - name: Send to Telegram
-      run: python3 telegram_sending.py
+      run: python3 |
+        parse_test.py
+        telegram_sending.py
 
 

@@ -21,4 +21,7 @@ for line in lines:
 with open(output_file, "w") as file:
     file.write("".join(test_results))
 
+with open(output_file, "w") as res:
+    test = res.read()
 print("Formatted test results saved to:", output_file)
+print(test)

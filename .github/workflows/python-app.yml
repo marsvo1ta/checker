@@ -38,6 +38,9 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run tests with pytest and capture results
-      run: pytest -n auto --telegram_id=$TELEGRAM_BOT_TOKEN --telegram_token=$TELEGRAM_CHAT_ID
+      run: pytest -rA > test_results.txt
+
+    - name: Send to Telegram
+      run: python telegram_sending.py
 
 

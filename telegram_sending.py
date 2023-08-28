@@ -18,4 +18,4 @@ def send_telegram_message(bot_token, chat_id, message):
 bot_token = TELEGRAM_BOT_TOKEN
 chat_id = TELEGRAM_CHAT_ID
 
-send_telegram_message(bot_token, chat_id, 'message')
+send_telegram_message(bot_token, chat_id, 'message1')

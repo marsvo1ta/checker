@@ -14,7 +14,7 @@ for line in lines:
         module = test_path[1].split("/")[0]
         test_name = test_path[2]
         result = parts[-2]
-        result = "**PASS**" if result == "PASSED" else "**FAIL**"
+        result = "PASS" if result == "PASSED" else "FAIL"
         test_results.append(f"{result} {module} {test_name}")
 
 # Save formatted test results to a file

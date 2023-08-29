@@ -9,7 +9,7 @@ def get_current_time(timezone='Europe/Kiev', format='%d.%m.%Y %H:%M:%S'):
     tz = pytz.timezone(timezone)
     current_time = datetime.now(tz)
     formatted_time = current_time.strftime(format)
-    return formatted_time
+    return f'**{formatted_time}**'
 
 
 def send_telegram_message(bot_token, chat_id, message):

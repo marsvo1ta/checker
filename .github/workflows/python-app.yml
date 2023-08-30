@@ -30,8 +30,6 @@ jobs:
         python-version: 3.11
         cache: 'pip' 
 
-      env:
-        PYTHONPATH: ${{ github.workspace }}/checker
 
     - name: Install dependencies
       run: |

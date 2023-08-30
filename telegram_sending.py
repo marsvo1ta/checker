@@ -47,6 +47,5 @@ if 'FAIL' in message.split():
     send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{message}', 'HTML')
     send_telegram_sticker(bot_token, chat_id, FAIL)
 else:
-    send_telegram_message(bot_token, chat_id, get_current_time(), 'HTML')
+    send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\nУсі тести пройшли успішно', 'HTML')
     send_telegram_sticker(bot_token, chat_id, PASS)
-print(message.split())

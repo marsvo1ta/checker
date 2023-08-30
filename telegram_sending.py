@@ -8,6 +8,14 @@ bot_token = TELEGRAM_BOT_TOKEN
 chat_id = TELEGRAM_CHAT_ID
 
 
+def add_tag(tag, text):
+    return f'<{tag}>{text}</{tag}>'
+
+
+def bold(text):
+    return add_tag('b', text)
+
+
 def get_current_time(timezone='Europe/Kiev', format='%d.%m.%Y %H:%M:%S'):
     tz = pytz.timezone(timezone)
     current_time = datetime.now(tz)
@@ -47,5 +55,5 @@ if 'FAIL' in message.split():
     send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{message}', 'HTML')
     send_telegram_sticker(bot_token, chat_id, FAIL)
 else:
-    send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\nУсі тести пройшли успішно', 'HTML')
+    send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{bold("Усі тести пройшли успішно")}', 'HTML')
     send_telegram_sticker(bot_token, chat_id, PASS)

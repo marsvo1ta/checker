@@ -49,3 +49,4 @@ if 'FAIL' in message.split():
 else:
     send_telegram_message(bot_token, chat_id, get_current_time(), 'HTML')
     send_telegram_sticker(bot_token, chat_id, PASS)
+print(message.split())

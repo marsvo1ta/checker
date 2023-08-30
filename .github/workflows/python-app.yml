@@ -1,6 +1,7 @@
 name: Website Checker
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main  

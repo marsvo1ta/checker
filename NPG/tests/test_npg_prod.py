@@ -30,7 +30,7 @@ class TestNPG(BaseCase):
                   'filter[pointType]': 'branch'}
         response = self.get(f'{NPG_URL_PROD}warehouses', headers=self.auth_manager.prod_admin_auth(), params=params)
         total = response.json()['metadata']['total']
-        self.assertGreater(total, 1, f'total = {total} statuscode = {response.status_code}')
+        self.assertGreater(total, 40_000, f'total = {total} statuscode = {response.status_code}')
 
     def test_get_poland_lockers_by_partner_id(self):
         params = {'filter[country.code]': 'PL', 'filter[partnerId]': '[176|95]',

@@ -4,7 +4,6 @@ output_file = "formatted_test_results.txt"
 with open(input_file, "r") as file:
     lines = file.readlines()
 
-# Extract and format test results
 test_results = []
 
 for line in lines:
@@ -17,9 +16,8 @@ for line in lines:
         result = "PASS" if result == "PASSED" else "FAIL"
         test_results.append(f"{result} {module} {test_name}")
 
-# Save formatted test results to a file
 with open(output_file, "w") as file:
-    file.write("".join(test_results))
+    file.write("\n".join(test_results))
 
 with open(output_file, "r") as res:
     test = res.read()

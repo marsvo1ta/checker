@@ -1,13 +1,13 @@
 import os
 
-import pytest
+
 import requests
 
 from basecase import BaseCase
 from data.credentials import NPG_URL_PROD, NPG_URL_STAGE
 from auth.authorization import AuthManager
 from json_data.json_serialize import json_serialize
-
+from json_data.json_file_path import get_json_file_path
 
 class TestCalculate(BaseCase):
     def setUp(self):
@@ -18,9 +18,9 @@ class TestCalculate(BaseCase):
         url = f'{NPG_URL_PROD}international-express-waybills/calculate'
         auth = self.auth_manager.prod_admin_auth()
 
-        current_script_directory = os.path.dirname(os.path.abspath(__file__))
-        json_file_path = os.path.join(current_script_directory, '..', '..', 'json_data', 'calculate', 'CA_UA_prod.json')
-
+        # current_script_directory = os.path.dirname(os.path.abspath(__file__))
+        # json_file_path = os.path.join(current_script_directory, '..', '..', 'json_data', 'calculate', 'CA_UA_prod.json')
+        json_file_path = get_json_file_path('CA_UA_prod')
         json_data = json_serialize(json_file_path)
         response = requests.post(url, headers=auth, json=json_data)
         self.assertEqual(response.status_code, 200)

@@ -18,10 +18,11 @@ class TestCalculate(BaseCase):
         url = f'{NPG_URL_PROD}international-express-waybills/calculate'
         auth = self.auth_manager.prod_admin_auth()
 
-        json_file_path = '/Users/anton/Documents/health_checker/json_data/calculate/CA_UA_prod.json'
-        json_data = json_serialize(json_file_path)
+        current_script_directory = os.path.dirname(os.path.abspath(__file__))
+        json_file_path = os.path.join(current_script_directory, '..', '..', 'json_data', 'calculate', 'CA_UA_prod.json')
 
+        json_data = json_serialize(json_file_path)
         response = requests.post(url, headers=auth, json=json_data)
         self.assertEqual(response.status_code, 200)
-        print(response.json()['deliveryPriceCost'])
+        print(response.json()['\ndeliveryPriceCost'])
         print(response.json()['domesticCurrencyCost'])

@@ -1,0 +1,14 @@
+{
+  "movementVectorProductId": "20ecd821-e769-4f5a-a398-5106389b5d6f",
+  "customerType": "individual",
+   "cargoSpaces": [
+      {
+        "weight": 3,
+        "length": 3,
+        "width": 3,
+        "height": 3,
+        "cargoType": "cargo"
+      }
+    ],
+   "services": []
+}

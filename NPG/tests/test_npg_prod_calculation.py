@@ -24,5 +24,5 @@ class TestCalculate(BaseCase):
         json_data = json_serialize(json_file_path)
         response = requests.post(url, headers=auth, json=json_data)
         self.assertEqual(response.status_code, 200)
-        print(response.json()['\ndeliveryPriceCost'])
+        print(response.json()['deliveryPriceCost'])
         print(response.json()['domesticCurrencyCost'])

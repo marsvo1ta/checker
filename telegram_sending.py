@@ -49,11 +49,13 @@ def send_telegram_sticker(bot_token, chat_id, sticker_id):
 
 with open('formatted_test_results.txt', 'r') as file:
     message = file.read()
+    count = len(message.split("\n")[0::2])
 
 
 if 'FAIL' in message.split():
     send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{message}', 'HTML')
     send_telegram_sticker(bot_token, chat_id, FAIL)
 else:
-    send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{bold("Усі тести пройшли успішно")}', 'HTML')
+    send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{bold(f"Усі тести пройшли успішно")}', 'HTML')
+    send_telegram_message(bot_token, chat_id, f'Кількість тестів: {count}')
     send_telegram_sticker(bot_token, chat_id, PASS)

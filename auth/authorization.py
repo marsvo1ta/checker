@@ -50,3 +50,5 @@ class AuthManager:
             return response.json()['token']
         return None
 
+
+print(AuthManager().get_token('prod'))

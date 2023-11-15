@@ -9,6 +9,7 @@ from auth.authorization import AuthManager
 from json_data.json_serialize import json_serialize
 from json_data.json_file_path import get_json_file_path
 
+
 class TestCalculate(BaseCase):
     def setUp(self):
         super().setUp()
@@ -18,11 +19,22 @@ class TestCalculate(BaseCase):
         url = f'{NPG_URL_PROD}international-express-waybills/calculate'
         auth = self.auth_manager.prod_admin_auth()
 
-        # current_script_directory = os.path.dirname(os.path.abspath(__file__))
-        # json_file_path = os.path.join(current_script_directory, '..', '..', 'json_data', 'calculate', 'CA_UA_prod.json')
-        json_file_path = get_json_file_path('CA_UA_prod')
-        json_data = json_serialize(json_file_path)
+        json_data = json_serialize(get_json_file_path('CA_UA_prod'))
         response = requests.post(url, headers=auth, json=json_data)
+
         self.assertEqual(response.status_code, 200)
+
+        print(response.json()['deliveryPriceCost'])
+        print(response.json()['domesticCurrencyCost'])
+
+    def test_US_UA(self):
+        url = f'{NPG_URL_PROD}international-express-waybills/calculate'
+        auth = self.auth_manager.prod_admin_auth()
+
+        json_data = json_serialize(get_json_file_path('US_UA_prod'))
+        response = requests.post(url, headers=auth, json=json_data)
+
+        self.assertEqual(response.status_code, 200)
+
         print(response.json()['deliveryPriceCost'])
         print(response.json()['domesticCurrencyCost'])

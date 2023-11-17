@@ -31,7 +31,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run tests with pytest and capture results
-      run: pytest test_rozetka.py
+      run: pytest NPS/tests/test_rozetka.py
 
 
         

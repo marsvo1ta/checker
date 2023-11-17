@@ -1,0 +1,39 @@
+name: parse
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main  
+  schedule:
+    - cron: '*/30 * * * *'
+
+jobs:
+  check-website:
+    runs-on: ubuntu-latest
+    env:
+      TG_ROZ_TOKEN: ${{ secrets.TG_ROZ_TOKEN }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+        cache: 'pip' 
+
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests with pytest and capture results
+      run: pytest test_rozetka.py
+
+
+        
+
+

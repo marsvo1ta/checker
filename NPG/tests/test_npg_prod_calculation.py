@@ -20,37 +20,44 @@ class TestCalculate(BaseCase):
         response = requests.post(self.url, headers=self.auth, json=json_data)
         return response
 
+    def assertions(self, response):
+        body = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertGreater(body['deliveryPriceCost']['amount'], 0)
+
+    def working_routes(self, response):
+        body = response.json()
+        all_routes = body['services']
+        return [i for i in all_routes if '_1' in i]
+
+    def logs(self, response):
+        body = response.json()
+        print(f"\n{body['deliveryPriceCost']}\n"
+              f"{body['domesticCurrencyCost']}\n"
+              f"{self.working_routes(response)}")
+        print(body['services'][-1]) if body['services'][-1] in ['Postwoman', 'Warehouse', 'Door', 'CSS'] else None
+
     def test_CA_UA(self):
         response = self.json_data('CA_UA_prod')
-        self.assertEqual(response.status_code, 200)
-        print()
-        print(response.json()['deliveryPriceCost'])
-        print(response.json()['domesticCurrencyCost'])
+        self.assertions(response)
+        self.logs(response)
 
     def test_US_UA(self):
         response = self.json_data('US_UA_prod')
-        self.assertEqual(response.status_code, 200)
-        print()
-        print(response.json()['deliveryPriceCost'])
-        print(response.json()['domesticCurrencyCost'])
+        self.assertions(response)
+        self.logs(response)
 
     def test_GB_UA(self):
         response = self.json_data('GB_UA_prod')
-        self.assertEqual(response.status_code, 200)
-        print()
-        print(response.json()['deliveryPriceCost'])
-        print(response.json()['domesticCurrencyCost'])
+        self.assertions(response)
+        self.logs(response)
 
     def test_UA_PL_global(self):
         response = self.json_data('UA_PL_global_delivery_prod')
-        self.assertEqual(response.status_code, 200)
-        print()
-        print(response.json()['deliveryPriceCost'])
-        print(response.json()['domesticCurrencyCost'])
+        self.assertions(response)
+        self.logs(response)
 
     def test_UA_PL_things(self):
         response = self.json_data('UA_PL_things_prod')
-        self.assertEqual(response.status_code, 200)
-        print()
-        print(response.json()['deliveryPriceCost'])
-        print(response.json()['domesticCurrencyCost'])
+        self.assertions(response)
+        self.logs(response)

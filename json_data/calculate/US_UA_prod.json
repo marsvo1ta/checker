@@ -10,5 +10,6 @@
         "cargoType": "cargo"
       }
     ],
-   "services": []
+   "services": [],
+  "skipError": true
 }

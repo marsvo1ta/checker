@@ -35,7 +35,7 @@ class TestCalculate(BaseCase):
         print(f"\n{body['deliveryPriceCost']}\n"
               f"{body['domesticCurrencyCost']}\n"
               f"{self.working_routes(response)}")
-        print(body['services'][-1]) if body['services'][-1] in ['Postwoman', 'Warehouse', 'Door', 'CSS'] else None
+        print(body['services'][-1])
 
     def test_CA_UA(self):
         response = self.json_data('CA_UA_prod')

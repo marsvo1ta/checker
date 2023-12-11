@@ -7,7 +7,7 @@ class TestCalculate(BaseCase):
 
     def setUp(self):
         super().setUp()
-        self.url = f'{NPG_DDC_PROD}search/cargo?country-code=ua&locale=uk&keyword='
+        self.url = f'{NPG_DDC_PROD}search/cargo?country-code=ua&size=100&fuzzy=true&locale=uk&keyword='
 
     def test_ddc_ua(self):
         keywords_list = ['куртка', 'шорти', 'мʼяч', 'штани']
@@ -22,7 +22,7 @@ class TestCalculate(BaseCase):
         for idx, word in enumerate(keywords_list):
             request_url = f'{self.url}{word}'
             response = requests.get(request_url)
-            self.assertIsNotNone(response.json()['items'], word)
+            self.assertIsNotNone(response.json().get('items'), word)
 
     def test_ddc_pl(self):
         keywords_list = ['kurtka', 'spodenki', 'piłka', 'spodnie']
@@ -30,4 +30,4 @@ class TestCalculate(BaseCase):
         for idx, word in enumerate(keywords_list):
             request_url = f'{self.url}{word}'
             response = requests.get(request_url)
-            self.assertIsNotNone(response.json()['items'], word)
+            self.assertIsNotNone(response.json().get('items'),  f'{word} {request_url}')

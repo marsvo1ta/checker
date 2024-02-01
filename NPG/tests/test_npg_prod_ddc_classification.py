@@ -82,7 +82,26 @@ class TestClassification(BaseCase):
             self.assertEqual(category, category_en)
             self.assertEqual(dots_hs_code, hscode)
 
-    def test_pagination(self):
-        """Not Implemented"""
-        pass
+    def test_pagination_ua(self):
+        keywords_list = ['майка', 'взуття', 'лялька', 'кеди']
+        for page, word in enumerate(keywords_list):
+            request_url = f'{self.url}{word}&offset={page}'
+            response = requests.get(request_url)
+            pagination = response.json()['pagination']
+            self.assertEqual(pagination['size'], 100)
+            self.assertEqual(pagination['offset'], page)
+            self.assertNotEqual(pagination['total'], 0)
+            print(pagination)
+
+    def test_pagination_us(self):
+        keywords_list = ['Hat', 'Phone', 'Computer PC', 'Airsoft weapon']
+        self.url = self.url.replace('locale=uk', 'locale=en')
+        for page, word in enumerate(keywords_list):
+            request_url = f'{self.url}{word}&offset={page}'
+            response = requests.get(request_url)
+            pagination = response.json()['pagination']
+            self.assertEqual(pagination['size'], 100)
+            self.assertEqual(pagination['offset'], page)
+            self.assertNotEqual(pagination['total'], 0)
+            print(pagination)
 

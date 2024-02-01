@@ -21,10 +21,12 @@ class TestUser(BaseCase):
             "lastName": "Test",
             "sex": "F"}
         response = requests.post(self.url, json=body, headers=self.auth_back)
+        print(response.json())
         self.assertEqual(response.json()['npsCid'], 'NP000541128')
 
     def test_user_addresses_list(self):
         body = {"npsCid": "NP000541128"}
         url = f'{self.url}/addresses'
         response = requests.post(url, json=body, headers=self.auth_back)
+        print(response.json())
         self.assertIsNotNone(response.json()['addresses'])

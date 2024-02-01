@@ -10,5 +10,7 @@ class TestLogin(BaseCase):
         self.auth_user = self.auth_manager.user_token
 
     def test_auth(self):
+        print(self.auth_back)
+        print(self.auth_user)
         self.assertIsNotNone(self.auth_user)
         self.assertIsNotNone(self.auth_back)

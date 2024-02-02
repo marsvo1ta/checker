@@ -13,13 +13,13 @@ class PartnersAuth:
         self.back_token = None
         self.user_token = None
 
-    # def get_token_back(self):
-    #     basic_auth = (self.basic_login, self.basic_password)
-    #     body = {"login": "test_test", "password": "Password1"}
-    #     response = requests.post(self.back_auth_url, auth=basic_auth, json=body)
-    #     self.back_token = response.json().get('token')
-    #
-    #     return self.back_token
+    def get_token_back(self):
+        basic_auth = (self.basic_login, self.basic_password)
+        body = {"login": "test_test", "password": "Password1"}
+        response = requests.post(self.back_auth_url, auth=basic_auth, json=body)
+        self.back_token = response.json()['token']
+
+        return response.json()['token']
     #
     # def get_token_user(self):
     #     body = {"email": self.mail, "password": self.password}
@@ -47,5 +47,5 @@ t = PartnersAuth()
 def test():
     print(t.login('stage'))
     assert t.login('stage') is not None
-    # print(t.back_token)  # виводимо токен для back_auth
+    print(t.get_token_back())  # виводимо токен для back_auth
     # print(t.user_token)  # виводимо токен для user_auth

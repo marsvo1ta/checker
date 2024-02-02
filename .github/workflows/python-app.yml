@@ -44,7 +44,7 @@ jobs:
 
     - name: Run tests with pytest and capture results
 #      run: pytest -n auto -rA -s -v | tee test_results.txt
-      run: pytest auth/partners_api_auth.py -s
+      run: python auth/partners_api_auth.py
 #    - name: Send to Telegram
 #      run: |
 #        python3 parse_test.py

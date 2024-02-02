@@ -10,15 +10,12 @@ class PartnersAuth:
         self.url = NPS_URL_STAGE
         self.back_auth_url = f'{self.url}api/partners/login'
         self.user_auth_url = f'{self.url}api/user/login/password'
-        self.back_token = None  # тепер токен - атрибут класу
-        self.user_token = None  # тепер токен - атрибут класу
-
+        self.back_token = None
+        self.user_token = None
     def get_token_back(self):
         basic_auth = (self.basic_login, self.basic_password)
         body = {"login": "test_test", "password": "Password1"}
         response = requests.post(self.back_auth_url, auth=basic_auth, json=body)
-
-        # тут ми зберігаємо токен в атрибуті класу
         self.back_token = response.json().get('token')
 
         return self.back_token
@@ -26,8 +23,6 @@ class PartnersAuth:
     def get_token_user(self):
         body = {"email": self.mail, "password": self.password}
         response = requests.post(self.user_auth_url, json=body)
-
-        # тут ми зберігаємо токен в атрибуті класу
         self.user_token = response.json().get('token')
 
         return self.user_token

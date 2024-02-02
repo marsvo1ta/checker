@@ -40,3 +40,9 @@ class PartnersAuth:
         #     print(f'Виникла помилка. Відповідь: "{response.text}"')
 
 
+t = PartnersAuth()
+tt = t.back_token
+
+def test():
+    print(tt)
+    assert tt is not None

@@ -24,7 +24,7 @@ class PartnersAuth:
                                  json=body)
 
         # try:
-        return response
+        return response.headers
         # except:
         #     print(f'Виникла помилка. Відповідь: "{response.text}"')
 

@@ -23,10 +23,10 @@ class PartnersAuth:
                                  auth=basic_auth,
                                  json=body)
 
-        try:
-            return response.json()['token']
-        except:
-            print(response.text)
+        # try:
+        return response.json()['token']
+        # except:
+        #     print(f'Виникла помилка. Відповідь: "{response.text}"')
 
     def get_token_user(self):
         body = {
@@ -34,9 +34,9 @@ class PartnersAuth:
             "password": self.password}
 
         response = requests.post(self.user_auth_url, json=body)
-        try:
-            return response.json()['token']
-        except:
-            print(response.text)
+        # try:
+        return response.json()['token']
+        # except:
+        #     print(f'Виникла помилка. Відповідь: "{response.text}"')
 
 

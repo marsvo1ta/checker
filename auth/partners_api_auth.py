@@ -22,8 +22,11 @@ class PartnersAuth:
         response = requests.post(self.back_auth_url,
                                  auth=basic_auth,
                                  json=body)
-        print(response.text)
-        return response.json()['token']
+
+        try:
+            return response.json()['token']
+        except:
+            print(response.text)
 
     def get_token_user(self):
         body = {
@@ -31,7 +34,9 @@ class PartnersAuth:
             "password": self.password}
 
         response = requests.post(self.user_auth_url, json=body)
-        print(response.text)
-        return response.json()['token']
+        try:
+            return response.json()['token']
+        except:
+            print(response.text)
 
 

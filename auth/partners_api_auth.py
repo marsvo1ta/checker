@@ -35,7 +35,7 @@ class PartnersAuth:
 
         response = requests.post(self.user_auth_url, json=body)
         # try:
-        return response.text
+        return response.json()
         # except:
         #     print(f'Виникла помилка. Відповідь: "{response.text}"')
 

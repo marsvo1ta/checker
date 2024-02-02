@@ -48,4 +48,4 @@ def test():
     print(t.login('stage'))
     assert t.login('stage') is not None
     print(t.get_token_back())  # виводимо токен для back_auth
-    # print(t.user_token)  # виводимо токен для user_auth
+    assert t.get_token_back() is not None

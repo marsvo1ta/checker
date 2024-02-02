@@ -46,5 +46,6 @@ t = PartnersAuth()
 
 def test():
     print(t.login('stage'))
+    assert t.login('stage') is not None
     # print(t.back_token)  # виводимо токен для back_auth
     # print(t.user_token)  # виводимо токен для user_auth

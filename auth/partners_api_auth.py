@@ -44,5 +44,5 @@ t = PartnersAuth()
 tt = t.back_token
 
 def test():
-    print(tt)
+    print(tt.get('token'))
     assert tt is not None

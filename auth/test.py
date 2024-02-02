@@ -12,4 +12,5 @@ def test_get_token_back():
     response = requests.post(url,
                              auth=basic_auth,
                              json=body)
-    print(response.text)
+    json_response = response.json()
+    print(json_response.get('token'))

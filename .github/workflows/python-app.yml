@@ -12,19 +12,19 @@ jobs:
   check-website:
     runs-on: ubuntu-latest
 
-#    env:
-#      NPS_URL_PROD: ${{ secrets.NPS_URL_PROD }}
-#      NPG_URL_PROD: ${{ secrets.NPG_URL_PROD}}
-#      NPG_URL_STAGE: ${{ secrets.NPG_URL_STAGE}}
-#      NPG_ADMIN_EMAIL: ${{ secrets.NPG_ADMIN_EMAIL}}
-#      NPG_ADMIN_PASS: ${{ secrets.NPG_ADMIN_PASS}}
-#      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-#      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-#      NPG_DDC_PROD: ${{ secrets.NPG_DDC_PROD }}
-#      NPS_URL: ${{ secrets.NPS_URL_STAGE }}
-#      PARTNERS_LOGIN: ${{ secrets.PARTNERS_LOGIN }}
-#      PARTNERS_PASS: ${{ secrets.PARTNERS_PASS }}
-#      SEND_TO_GMAIL: ${{ secrets.SEND_TO_GMAIL }}
+    env:
+      NPS_URL_PROD: ${{ secrets.NPS_URL_PROD }}
+      NPG_URL_PROD: ${{ secrets.NPG_URL_PROD}}
+      NPG_URL_STAGE: ${{ secrets.NPG_URL_STAGE}}
+      NPG_ADMIN_EMAIL: ${{ secrets.NPG_ADMIN_EMAIL}}
+      NPG_ADMIN_PASS: ${{ secrets.NPG_ADMIN_PASS}}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      NPG_DDC_PROD: ${{ secrets.NPG_DDC_PROD }}
+      NPS_URL: ${{ secrets.NPS_URL_STAGE }}
+      PARTNERS_LOGIN: ${{ secrets.PARTNERS_LOGIN }}
+      PARTNERS_PASS: ${{ secrets.PARTNERS_PASS }}
+      SEND_TO_GMAIL: ${{ secrets.SEND_TO_GMAIL }}
 
     steps:
     - name: Checkout repository
@@ -44,7 +44,7 @@ jobs:
 
     - name: Run tests with pytest and capture results
 #      run: pytest -n auto -rA -s -v | tee test_results.txt
-      run: pytest auth/test.py -s
+      run: pytest auth/partners_api_auth.py -s
 #    - name: Send to Telegram
 #      run: |
 #        python3 parse_test.py

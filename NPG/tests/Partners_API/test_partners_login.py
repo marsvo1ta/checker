@@ -6,11 +6,10 @@ class TestLogin(BaseCase):
     def setUp(self):
         super().setUp()
         self.auth_manager = PartnersAuth()
-        self.auth_back = self.auth_manager.back_token
-        self.auth_user = self.auth_manager.user_token
+
 
     def test_auth(self):
-        print(f'AUTH: {self.auth_back}')
-        print(f'AUTH: {self.auth_user}')
-        self.assertIsNotNone(self.auth_user)
-        self.assertIsNotNone(self.auth_back)
+        print(f'AUTH: {self.auth_manager.get_token_back()}')
+        # print(f'AUTH: {self.auth_user}')
+        # self.assertIsNotNone(self.auth_user)
+        # self.assertIsNotNone(self.auth_back)

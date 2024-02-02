@@ -44,7 +44,7 @@ jobs:
 
     - name: Run tests with pytest and capture results
 #      run: pytest -n auto -rA -s -v | tee test_results.txt
-      run: python3 NPG/tests/Partners_API/test_partners_login.py
+      run: pytest NPG/tests/Partners_API/test_partners_login.py
     - name: Send to Telegram
       run: |
         python3 parse_test.py

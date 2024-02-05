@@ -49,6 +49,3 @@ class AuthManager:
         if response.status_code == 200:
             return response.json()['token']
         return None
-
-
-print(AuthManager().get_token('prod'))

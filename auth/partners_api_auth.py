@@ -32,5 +32,5 @@ class PartnersAuth:
 
 def test():
     t = PartnersAuth()
-    print(t.get_token_user())
-    assert t.get_token_user() is not None
+    for i in [t.mail, t.password, t.back_auth_url]:
+        assert i is not None

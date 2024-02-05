@@ -28,9 +28,3 @@ class PartnersAuth:
         self.user_token = response.json()['token']
 
         return response.json()['token']
-
-
-def test():
-    t = PartnersAuth()
-    t.get_token_user()
-    assert t.user_token is not None, t.user_token

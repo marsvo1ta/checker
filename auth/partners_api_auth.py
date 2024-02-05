@@ -1,6 +1,7 @@
 import requests
 from data.credentials import *
 
+
 class PartnersAuth:
     def __init__(self):
         self.mail = NPS_EURO_MAIL
@@ -20,24 +21,14 @@ class PartnersAuth:
         self.back_token = response.json()['token']
 
         return response.json()['token']
-    #
-    # def get_token_user(self):
-    #     body = {"email": self.mail, "password": self.password}
-    #     response = requests.post(self.user_auth_url, json=body)
-    #     self.user_token = response.json().get('token')
-    #
-    #     return self.user_token
 
-    def login(self, environment):
-        body = {
-            'email': NPG_ADMIN_EMAIL,
-            'password': NPG_ADMIN_PASS
-        }
-        url = f'{NPG_URL_STAGE if environment == "stage" else NPG_URL_PROD}login/admin'
-        response = requests.post(url, json=body)
-        if response.status_code == 200:
-            return response.json()['token']
-        return None
+    def get_token_user(self):
+        body = {"email": self.mail, "password": self.password}
+        response = requests.post(self.user_auth_url, json=body)
+        self.user_token = response.json()['token']
+
+        return response.json()['token']
+
 
 
 t = PartnersAuth()
@@ -45,7 +36,7 @@ t = PartnersAuth()
 # t.get_token_user()
 
 def test():
-    print(t.login('stage'))
-    assert t.login('stage') is not None
-    print(t.get_token_back())  # виводимо токен для back_auth
+    print(t.get_token_back())
     assert t.get_token_back() is not None
+    print(t.get_token_user())
+    assert t.get_token_user() is not None

@@ -49,6 +49,5 @@ jobs:
 #      run: |
 #        python3 parse_test.py
 #        python3 telegram_sending.py
-        
 
 

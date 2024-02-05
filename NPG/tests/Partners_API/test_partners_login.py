@@ -9,7 +9,5 @@ class TestLogin(BaseCase):
 
 
     def test_auth(self):
-        print(f'AUTH: {self.auth_manager.get_token_back()}')
-        # print(f'AUTH: {self.auth_user}')
-        # self.assertIsNotNone(self.auth_user)
-        # self.assertIsNotNone(self.auth_back)
+        self.auth_manager.get_token_back()
+        self.assertIsNotNone(self.auth_manager.back_token)

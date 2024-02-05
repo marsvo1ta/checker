@@ -18,13 +18,18 @@ class PartnersAuth:
         basic_auth = (self.basic_login, self.basic_password)
         body = {"login": "test_test", "password": "Password1"}
         response = requests.post(self.back_auth_url, auth=basic_auth, json=body)
-        self.back_token = response.json()['token']
+        self.back_token = f'Bearer {response.json()['token']}'
 
         return response.json()['token']
 
     def get_token_user(self):
         body = {"email": self.mail, "password": self.password}
         response = requests.post(self.user_auth_url, json=body)
-        self.user_token = response.json()['token']
+        self.user_token = f'Bearer {response.json()['token']}'
 
         return response.json()['token']
+
+    def authorization(self, auth_role):
+        role = {'back': self.back_token,
+                'user': self.user_token}
+        return {'Authorization': role.get(auth_role)}

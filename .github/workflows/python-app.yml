@@ -22,6 +22,7 @@ jobs:
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       NPG_DDC_PROD: ${{ secrets.NPG_DDC_PROD }}
       NPS_URL: ${{ secrets.NPS_URL_STAGE }}
+      NPS_PASS_PROD: ${{ secrets.NPS_PASS_PROD }}
       PARTNERS_LOGIN: ${{ secrets.PARTNERS_LOGIN }}
       PARTNERS_PASS: ${{ secrets.PARTNERS_PASS }}
       SEND_TO_GMAIL: ${{ secrets.SEND_TO_GMAIL }}

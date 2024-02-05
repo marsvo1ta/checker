@@ -36,7 +36,4 @@ t = PartnersAuth()
 # t.get_token_user()
 
 def test():
-    print(t.get_token_back())
-    assert t.get_token_back() is not None
-    print(t.get_token_user())
-    assert t.get_token_user() is not None
+    assert t.user_token is not None

@@ -30,11 +30,7 @@ class PartnersAuth:
         return response.json()['token']
 
 
-
-t = PartnersAuth()
-# t.get_token_back()
-# t.get_token_user()
-
 def test():
+    t = PartnersAuth()
     t.get_token_user()
     assert t.user_token is not None

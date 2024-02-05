@@ -32,5 +32,5 @@ class PartnersAuth:
 
 def test():
     t = PartnersAuth()
-    t.get_token_user()
-    assert t.user_token is not None
+    print(t.get_token_user())
+    assert t.get_token_user() is not None

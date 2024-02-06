@@ -9,7 +9,7 @@ KEYWORDS_EN = ["Kyiv", "Warsaw", "Bucuresti", "Chisinau", "Praha",
                     "Washington", "Berlin", "Vilnius", "Ottawa", "London",
                     "Beijing", "Madrid", "Paris", "Jerusalem", "Riga", "Amsterdam",
                     "Rome", "Dublin", "Bern", "Ankara", "Tbilisi", "Bratislava",
-                    "Tallinn", "Vienna", "Nicosia", "Canberra", "Lisbon", "Sofia",
+                    "Tallinn", "Vienna", "Nicosia", "Canberra", "Lisboa", "Sofia",
                     "Budapest", "Brussels", "Copenhagen", "Stockholm", "New Delhi",
                     "Oslo", "Baku", "Helsinki", "Zagreb", "Tokyo", "Ljubljana",
                     "Mexico City", "Singapore", "Brasília", "Seoul", "Belgrade",
@@ -27,4 +27,20 @@ KEYWORDS_UA = ["Київ", "Варшава", "Бухарест", "Кишинів
                     "Загреб", "Токіо", "Любляна", "Мехіко", "Сінгапур", "Бразиліа",
                     "Сеул", "Белград", "Рабат", "Бангкок", "Люксембург", "Преторія",
                     "Ісламабад", "Веллінгтон", "Дакка", "Куала-Лумпур", "Маніла",
-                    "Валетта", "Буенос-Айрес", "Рейкʼявік", "Сан-Хуан", "Андорра-ла-Велья"]
+                    "Валлетта", "Буенос-Айрес", "Рейк'явік", "Сан-Хуан", "Андорра-ла-Велья"]
+
+CITIES_EN = ["Kharkiv", "Krakow", "Cluj-Napoca", "Balti", "Brno", "Los Angeles", "Hamburg", "Kaunas", "Toronto", "Manchester",
+             "Shanghai", "Barcelona", "Marseille", "Tel Aviv", "Daugavpils", "Rotterdam", "Milan", "Cork", "Zurich",
+             "Istanbul", "Batumi", "Kosice", "Tartu", "Graz", "Limassol", "Sydney", "Porto", "Plovdiv", "Debrecen",
+             "Antwerp", "Aarhus", "Gothenburg", "Mumbai", "Bergen", "Ganja", "Tampere", "Split", "Osaka", "Maribor",
+             "Guadalajara", "Singapore", "Sao Paulo", "Busan", "Novi Sad", "Casablanca", "Bangkok", "Luxembourg",
+             "Johannesburg", "Lahore", "Auckland", "Dhaka", "Kuala Lumpur", "Manila", "Birkirkara", "Buenos Aires",
+             "Reykjavik", "San Juan", "Escaldes-Engordany"]
+
+CITIES_UA = ["Харків", "Краків", "Клуж-Напока", "Бєльці", "Брно", "Лос-Анджелес", "Гамбург", "Каунас", "Торонто", "Манчестер",
+             "Шанхай", "Барселона", "Марсель", "Тель-Авів", "Даугавпілс", "Роттердам", "Мілан", "Корк", "Цюрих",
+             "Стамбул", "Батумі", "Кошице", "Тарту", "Грац", "Лімасол", "Сідней", "Порту", "Пловдив", "Дебрецен",
+             "Антверпен", "Орхус", "Ґетеборг", "Мумбаї", "Берген", "Гянджа", "Тампере", "Спліт", "Осака", "Марибор",
+             "Гвадалахара", "Сінгапур", "Сан-Паулу", "Пусан", "Нови Сад", "Касабланка", "Бангкок", "Еш-сюр-Альзет",
+             "Йоганнесбург", "Лахор", "Окленд", "Дакка", "Куала-Лумпур", "Маніла", "Біркіркара", "Буенос-Айрес",
+             "Рейк'явік", "Сан-Хуан", "Ескальдес-Енгордані"]

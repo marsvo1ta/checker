@@ -44,11 +44,11 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run tests with pytest and capture results
-#      run: pytest -n auto -rA -s -v | tee test_results.txt
-      run: pytest NPG/tests/Partners_API/ -s -v
-#    - name: Send to Telegram
-#      run: |
-#        python3 parse_test.py
-#        python3 telegram_sending.py
+      run: pytest -n auto -rA -s -v | tee test_results.txt
+#      run: pytest NPG/tests/Partners_API/ -s -v
+    - name: Send to Telegram
+      run: |
+        python3 parse_test.py
+        python3 telegram_sending.py
 
 

@@ -1,6 +1,5 @@
-from pprint import pprint
-
 import requests
+
 from basecase import BaseCase
 from data.credentials import NPG_DDC_PROD, NPG_DDC_STAGE
 from data.country_codes.country_codes import *

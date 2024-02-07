@@ -26,6 +26,15 @@ jobs:
       PARTNERS_LOGIN: ${{ secrets.PARTNERS_LOGIN }}
       PARTNERS_PASS: ${{ secrets.PARTNERS_PASS }}
       SEND_TO_GMAIL: ${{ secrets.SEND_TO_GMAIL }}
+      CUSTOMRATES_AUTH_STAGE: ${{ secrets.CUSTOMRATES_AUTH_STAGE }}
+      CUSTOMRATES_AUTH_PROD: ${{ secrets.CUSTOMRATES_AUTH_PROD }}
+      CUSTOMRATES_STAGE: ${{ secrets.CUSTOMRATES_STAGE }}
+      CUSTOMRATES_PROD : ${{ secrets.CUSTOMRATES_PROD }}
+      CUSTOMRATES_CLIENT_ID_STAGE: ${{ secrets.CUSTOMRATES_CLIENT_ID_STAGE }}
+      CUSTOMRATES_CLIENT_ID_PROD: ${{ secrets.CUSTOMRATES_CLIENT_ID_PROD }}
+      CUSTOMRATES_CLIENT_SECRET_STAGE: ${{ secrets.CUSTOMRATES_CLIENT_SECRET_STAGE }}
+      CUSTOMRATES_KEY_STAGE: ${{ secrets.CUSTOMRATES_KEY_STAGE }}
+      CUSTOMRATES_KEY_PROD: ${{ secrets.CUSTOMRATES_KEY_PROD }}
 
     steps:
     - name: Checkout repository
@@ -44,8 +53,8 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run tests with pytest and capture results
-      run: pytest -n auto -rA -s -v | tee test_results.txt
-#      run: pytest NPG/tests/Partners_API/ -s -v
+      run: pytest -n auto -rA -s -v --reruns=1| tee test_results.txt
+
     - name: Send to Telegram
       run: |
         python3 parse_test.py

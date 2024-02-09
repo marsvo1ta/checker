@@ -1,3 +1,6 @@
+import urllib
+from urllib import parse
+
 import requests
 
 from basecase import BaseCase
@@ -35,7 +38,10 @@ class TestLocalities(BaseCase):
             response = requests.get(self.url, params=params)
             try:
                 if response.json()['items'] is None:
-                    print(f"\n{code}: {keyword}"
+                    requested_url = response.request.url
+                    parsed_url = urllib.parse.unquote(requested_url)
+                    print(f"\n{parsed_url}")
+                    print(f"{code}: {keyword}"
                           f" items: {response.json()['items']}")
             except KeyError:
                 print(response.json(), response.request.url)
@@ -47,7 +53,10 @@ class TestLocalities(BaseCase):
             response = requests.get(self.url, params=params)
             try:
                 if response.json()['items'] is None:
-                    print(f"\n{code}: {keyword}"
+                    requested_url = response.request.url
+                    parsed_url = urllib.parse.unquote(requested_url)
+                    print(f"\n{parsed_url}")
+                    print(f"{code}: {keyword}"
                           f" items: {response.json()['items']}")
             except KeyError:
                 print(response.json(), response.request.url)

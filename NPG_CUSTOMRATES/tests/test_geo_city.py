@@ -43,7 +43,8 @@ class TestCalculate(BaseCase):
             items = response.json()['items']
             r = response.json()
             if not items:
-                print(f'\n{response.request.url}')
+                print(f'\n{url}')
+                print(f'{response.request.url}')
                 print(f"{code} {keyword}\n{r}")
                 if 'ʼ' in keyword:
                     print('Тут апостроф')
@@ -58,7 +59,8 @@ class TestCalculate(BaseCase):
             items = response.json()['items']
             r = response.json()
             if not items:
-                print(f'\n{response.request.url}')
+                # print(f'\n{response.request.url}')
+                print(f'\n{url}')
                 print(f"{code} {keyword}\n{r}")
                 if 'ʼ' in keyword:
                     print('Тут апостроф')

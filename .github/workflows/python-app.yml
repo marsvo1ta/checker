@@ -53,7 +53,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run tests with pytest and capture results
-      run: pytest -n auto -rA -s -v --reruns=1 | tee test_results.txt
+      run: pytest -rA -s -v --reruns=1 | tee test_results.txt
 
     - name: Send to Telegram
       run: |

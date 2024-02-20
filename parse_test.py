@@ -7,11 +7,12 @@ with open(input_file, "r") as file:
 test_results = []
 
 for line in lines:
-    if "PASSED" in line or "FAILED" in line:
+    passed = line.startswith("PASSED")
+    failed = line.startswith("FAILED")
+    if passed or failed:
         parts = line.split(" ")
         test_path = parts[1].split("::")
 
-        # Перевірте, чи у test_path достатньо елементів
         if len(test_path) >= 2:
             module = test_path[1].split("/")[0]
             test_name = test_path[2]

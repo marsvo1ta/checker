@@ -6,6 +6,7 @@ with open(input_file, "r") as file:
 
 test_results = []
 
+print(lines)
 for line in lines:
     passed = line.startswith("PASSED")
     failed = line.startswith("FAILED")

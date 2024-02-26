@@ -57,7 +57,7 @@ jobs:
 
     - name: Send to Telegram
       run: |
-        python3 parse_test.py
+        python3 json_parse.py
         python3 telegram_sending.py
 
 

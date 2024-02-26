@@ -43,7 +43,6 @@ def send_telegram_sticker(bot_token, chat_id, sticker_id):
         'sticker': sticker_id
     }
     response = requests.post(url, json=payload)
-    print(response.status_code)
     return response
 
 

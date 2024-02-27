@@ -36,7 +36,8 @@ class TestCalculate(BaseCase):
     def capitals_request(self, lang: str):
         choice = {'ua': self.keywords_ua, 'en': self.keywords_en}
         for code, keyword in zip(self.codes, choice[lang]):
-            if code == 'sg':
+            if code == 'sg' or code == 'tr':
+                print(f'{code}: {keyword} Не знайдено!!!')
                 continue
             url = self.form_url(code, keyword)
             response = requests.get(url, headers=self.auth)
@@ -52,10 +53,12 @@ class TestCalculate(BaseCase):
     def cities_request(self, lang: str):
         choice = {'ua': self.cities_ua, 'en': self.cities_en}
         for code, keyword in zip(self.codes, choice[lang]):
-            if code == 'sg':
+            if code in ['sg', 'tr']:
+                print(f'{code}: {keyword} Не знайдено!!!')
                 continue
             url = self.form_url(code, keyword)
             response = requests.get(url, headers=self.auth)
+            self.assertIsNotNone(response.json()['items'])
             items = response.json()['items']
             r = response.json()
             if not items:

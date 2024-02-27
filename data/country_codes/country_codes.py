@@ -32,15 +32,15 @@ KEYWORDS_UA = ["Київ", "Варшава", "Бухарест", "Кишинів
 CITIES_EN = ["Kharkiv", "Krakow", "Cluj-Napoca", "Balti", "Brno", "Los Angeles", "Hamburg", "Kaunas", "Toronto", "Manchester",
              "Shanghai", "Barcelona", "Marseille", "Tel Aviv", "Daugavpils", "Rotterdam", "Milan", "Cork", "Zurich",
              "Istanbul", "Batumi", "Kosice", "Tartu", "Graz", "Limassol", "Sydney", "Porto", "Plovdiv", "Debrecen",
-             "Antwerp", "Aarhus", "Gothenburg", "Mumbai", "Bergen", "Ganja", "Tampere", "Split", "Osaka", "Maribor",
+             "Antwerp", "Aarhus", "Goteborg", "Mumbai", "Bergen", "Ganja", "Tampere", "Split", "Osaka", "Maribor",
              "Guadalajara", "Singapore", "Sao Paulo", "Busan", "Novi Sad", "Casablanca", "Bangkok", "Luxembourg",
              "Johannesburg", "Lahore", "Auckland", "Dhaka", "Kuala Lumpur", "Manila", "Birkirkara", "Buenos Aires",
              "Reykjavik", "San Juan", "Escaldes-Engordany"]
 
 CITIES_UA = ["Харків", "Краків", "Клуж-Напока", "Бєльці", "Брно", "Лос-Анджелес", "Гамбург", "Каунас", "Торонто", "Манчестер",
              "Шанхай", "Барселона", "Марсель", "Тель-Авів", "Даугавпілс", "Роттердам", "Мілан", "Корк", "Цюрих",
-             "Стамбул", "Батумі", "Кошице", "Тарту", "Грац", "Лімасол", "Сідней", "Порту", "Пловдив", "Дебрецен",
-             "Антверпен", "Орхус", "Ґетеборг", "Мумбаї", "Берген", "Гянджа", "Тампере", "Спліт", "Осака", "Марибор",
-             "Гвадалахара", "Сінгапур", "Сан-Паулу", "Пусан", "Нови Сад", "Касабланка", "Бангкок", "Еш-сюр-Альзет",
+             "Стамбул", "Батумі", "Кошіце", "Тарту", "Грац", "Лімасол", "Сідней", "Порту", "Пловдив", "Дебрецен",
+             "Антверпен", "Орхус", "Ґетеборг", "Мумбаї", "Берген", "Гянджа", "Тампере", "Спліт", "Осака", "Марібор",
+             "Гвадалахара", "Сінгапур", "Сан-Паулу", "Бусан", "Нови Сад", "Касабланка", "Бангкок", "Еш-сюр-Альзет",
              "Йоганнесбург", "Лахор", "Окленд", "Дакка", "Куала-Лумпур", "Маніла", "Біркіркара", "Буенос-Айрес",
              "Рейк'явік", "Сан-Хуан", "Ескальдес-Енгордані"]

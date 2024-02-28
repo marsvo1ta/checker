@@ -1,5 +1,7 @@
 import unittest
 import requests
+import random
+import string
 
 
 class BaseCase(unittest.TestCase):
@@ -24,3 +26,8 @@ class BaseCase(unittest.TestCase):
 
         return formatted_codes
 
+    def generate_tracking_number(self, prefix='TBA', length=12):
+        chars = string.ascii_letters + string.digits
+        numbers = ''.join(random.choices(chars, k=length - len(prefix)))
+
+        return f"{prefix}{numbers}"

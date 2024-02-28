@@ -1,5 +1,3 @@
-from pprint import pprint
-
 import requests
 
 from auth.partners_api_auth import PartnersAuth

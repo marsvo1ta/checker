@@ -3,3 +3,8 @@
 /test_results.txt
 /formatted_test_results.txt
 /.idea
+/NPG/downloaded_files/dashboard.lock
+/NPS/tests/saved_cookies/stage_login.txt
+/saved_cookies/stage_login.txt
+/auth/token.txt
+/NPG_CUSTOMRATES/tests/token.txt

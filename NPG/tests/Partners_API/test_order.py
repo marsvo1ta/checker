@@ -54,13 +54,27 @@ class TestOrder(BaseCase):
         }
         return body
 
-    def edit_track_json(self):
+    def edit_track_json(self) -> dict:
         body = {
             "npsCid": "NP000541130",
             "orderNumber": "NP70000002422696NPGSTAG",
             "trackNumber": "TBT494490876111"
         }
         return body
+
+    def promo_code_json(self, value: str) -> dict:
+        percent = {
+            "npsCid": "NP000541130",
+            "code": "buyout_percent",
+            "country": None
+        }
+        uah = {
+            "npsCid": "NP000541130",
+            "code": "buyout_uah",
+            "country": None
+        }
+        body = {'percent': percent, 'uah': uah}
+        return body[value]
 
     def list_orders_json(self):
         body = {
@@ -158,3 +172,89 @@ class TestOrder(BaseCase):
         body['filters']['state'] = ['draft']
         response = requests.post(url, json=body, headers=auth)
         self.assertTrue(response.json()['page']['totalItems'] != 0)
+
+    def test_amazon_code(self):
+        url = f'{self.url}amazon/code'
+        auth = self.auth_manager.authorization(BACK)
+        body = self.edit_track_json()
+        body.pop('trackNumber')
+        body.update({"code": "1234"})
+        response = requests.post(url, json=body, headers=auth)
+        self.assertEqual(response.json()['status'], 'success')
+
+        body.update({"code": "1" * 97})
+        response = requests.post(url, json=body, headers=auth)
+        self.assertEqual(response.json()['errors']['code'],
+                         'Значення занадто довге. Повинно бути рівне 96 символам або менше.')
+
+        body.update({"code": "1234", "orderNumber": "NP70000002422696NPGSTA"})
+        response = requests.post(url, json=body, headers=auth)
+        self.assertEqual(response.json()['errors']['orderNumber'], "Об'єкт не існує")
+
+    def test_upload_invoice(self):
+        url = 'https://npshopping-stag.c1.npshopping.com/api/partners/files/upload'.replace('/order', '')
+        auth = self.auth_manager.authorization(BACK)
+        file_path = "1.png"
+
+        with open(file_path, 'rb') as file:
+            files = {'invoice': file}
+            response = requests.post(url, files=files, headers=auth)
+        self.assertIn('invoices',response.json()['invoice'])
+
+    def test_tracking_history(self):
+        url = f'{self.url}tracking/history'
+        body = self.edit_track_json()
+        body.pop('trackNumber')
+        body['orderNumber'] = 'NP00000002423023NPGSTAG'
+        auth = self.auth_manager.authorization(BACK)
+        response = requests.post(url, json=body, headers=auth)
+        response_json = response.json()
+        response_list_keys = list(response_json[0].keys())
+        expected_list_keys = ['status', 'statusName', 'statusDescription', 'country', 'changedAt']
+        self.assertGreater(len(response_json), 10)
+        self.assertEqual(response_list_keys, expected_list_keys)
+
+        body['orderNumber'] = 'NP00000002423023NPGSTA'
+        response = requests.post(url, json=body, headers=auth)
+        self.assertEqual(response.json()['errorDescription'], 'Order not found')
+
+        body['orderNumber'] = 'NP00000002423023NPGSTAG'
+        body['npsCid'] = 'NP000541131'
+        response = requests.post(url, json=body, headers=auth)
+        self.assertEqual(response.json()['errorDescription'], 'This order does not belong to the user.')
+
+    def test_show_order(self):
+        url = f'{self.url}show'
+        auth = self.auth_manager.authorization(BACK)
+        body = self.edit_track_json()
+        body.pop('trackNumber')
+        response = requests.post(url, json=body, headers=auth)
+        actual_keys_list = list(response.json().keys())
+        expected_keys_list = ['orderNumber', 'createdAt', 'firstmileTracknumber', 'orderName',
+                              'senderCountryCode', 'shop', 'invoiceGoods', 'deliveryPoint',
+                              'shippingCost', 'currency', 'tracking', 'promoCode']
+        actual_shop_keys_list = ['id', 'name', 'country']
+        expected_shop_keys_list = list(response.json()['shop'].keys())
+        self.assertEqual(actual_keys_list, expected_keys_list)
+        self.assertEqual(actual_shop_keys_list, expected_shop_keys_list)
+
+    def test_validate_promo(self):
+        url = f'{self.url}validate-promo-code'
+        auth = self.auth_manager.authorization(BACK)
+        body = self.promo_code_json('uah')
+        response = requests.post(url, json=body, headers=auth)
+        valid = {
+            "status": True,
+            "value": "10₴",
+            "restrictedValue": 5
+        }
+        self.assertEqual(response.json(), valid)
+
+        body['code'] = 'buyout_percent'
+        valid['value'] = '10%'
+        response = requests.post(url, json=body, headers=auth)
+        self.assertEqual(response.json(), valid)
+
+        body['code'] = 'buyout_percent1'
+        response = requests.post(url, json=body, headers=auth)
+        self.assertFalse(response.json()['status'])

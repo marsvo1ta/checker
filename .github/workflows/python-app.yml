@@ -54,7 +54,7 @@ jobs:
 
     - name: Run tests with pytest and capture results
       run: pytest --headless -s -v -n auto --json=report.json
-          continue-on-error: true
+      continue-on-error: true
 
     - name: Send to Telegram
       run: |

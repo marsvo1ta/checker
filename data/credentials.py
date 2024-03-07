@@ -9,7 +9,7 @@ NPG_URL_PROD = os.environ.get('NPG_URL_PROD')
 NPG_ADMIN_EMAIL = os.environ.get('NPG_ADMIN_EMAIL')
 NPG_ADMIN_PASS = os.environ.get('NPG_ADMIN_PASS')
 NPG_DDC_PROD = os.environ.get('NPG_DDC_PROD')
-NPG_DDC_STAGE = 'https://npg-ddc-backend-stag.c1.npshopping.com/v1.0/'
+NPG_DDC_STAGE = os.environ.get('NPG_DDC_STAGE')
 
 CUSTOMRATES_AUTH_STAGE = os.environ.get('CUSTOMRATES_AUTH_STAGE')
 CUSTOMRATES_AUTH_PROD = os.environ.get('CUSTOMRATES_AUTH_PROD')

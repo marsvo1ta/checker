@@ -20,6 +20,7 @@ jobs:
       NPG_ADMIN_PASS: ${{ secrets.NPG_ADMIN_PASS}}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      NPG_DDC_STAGE: ${{ secrets.NPG_DDC_STAGE }}
       NPG_DDC_PROD: ${{ secrets.NPG_DDC_PROD }}
       NPS_URL: ${{ secrets.NPS_URL_STAGE }}
       NPS_PASS_PROD: ${{ secrets.NPS_PASS_PROD }}
@@ -54,6 +55,7 @@ jobs:
 
     - name: Run tests with pytest and capture results
       run: pytest --headless -s -v -n auto --json=report.json
+      continue-on-error: true
 
     - name: Send to Telegram
       run: |

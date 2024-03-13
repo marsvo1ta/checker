@@ -39,7 +39,7 @@ class TestLocalities(BaseCase):
                 continue
             params = self.parameters(code, keyword, 1)
             response = requests.get(self.url, params=params)
-            self.assertIsNotNone(response.json()['items'])
+            self.assertIsNotNone(response.json()['items'], msg=f'{response.request.url}')
             try:
                 if response.json()['items'] is None:
                     requested_url = response.request.url
@@ -58,7 +58,7 @@ class TestLocalities(BaseCase):
                 continue
             params = self.parameters(code, keyword, 1)
             response = requests.get(self.url, params=params)
-            self.assertIsNotNone(response.json()['items'])
+            self.assertIsNotNone(response.json()['items'], msg=f'{response.request.url}')
             try:
                 if response.json()['items'] is None:
                     requested_url = response.request.url

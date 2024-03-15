@@ -60,7 +60,7 @@ class TestUser(BaseCase):
         response = self.user_addresses_request()['addresses'][0]
         fields = ['id', 'country', 'type', 'city', 'street',
                   'house', 'building', 'flat', 'zipcode',
-                  'comment', 'isFavorite', 'branchRef']
+                  'comment', 'isFavorite', 'branchRef', 'cityRef']
         for i in response:
             self.assertIn(i, fields)
 

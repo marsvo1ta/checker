@@ -7,7 +7,7 @@ with (open('report.json', 'r') as f,
     for idx, test in enumerate(tests, start=1):
         status = test['outcome'].upper()
         test_name = ' '.join(test['name'].split('::')[-2:])
-        output = f'{idx}.{status} {test_name}\n\n'
+        output = f'{idx}. {status} {test_name}\n\n'
         output_file.write(output)
 
 

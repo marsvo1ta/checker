@@ -51,7 +51,7 @@ with open('formatted_test_results.txt', 'r') as file:
     count = len(message.split("\n")[0::2])
 
 
-if 'FAIL' in message.split():
+if 'FAILED' in message.split():
     send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{message}', 'HTML')
     send_telegram_sticker(bot_token, chat_id, FAIL)
 else:

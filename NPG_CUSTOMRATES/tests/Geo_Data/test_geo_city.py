@@ -7,7 +7,7 @@ from basecase import BaseCase
 from typing import Optional
 
 
-class TestCalculate(BaseCase):
+class TestGeo(BaseCase):
     auth_manager: Optional[CustomRatesAuthManager] = None
     auth: Optional[dict] = None
     token: Optional[str] = None
@@ -28,9 +28,10 @@ class TestCalculate(BaseCase):
         cls.keywords_ua = KEYWORDS_UA
         cls.cities_en = CITIES_EN
         cls.cities_ua = CITIES_UA
+        cls.url = cls.auth_manager.stage_url
 
     def form_url(self, code, keyword, size='1'):
-        url = f'https://api.dev.customsrates.com/geoCity/{code}?keyword={keyword}&size={size}'
+        url = f'{self.url}geoCity/{code}?keyword={keyword}&size={size}'
         return url
 
     def capitals_request(self, lang: str):
@@ -40,8 +41,6 @@ class TestCalculate(BaseCase):
             response = requests.get(url, headers=self.auth)
             items = response.json()['items']
             self.assertIsNotNone(items, msg=f'{code}: {keyword} Не знайдено!!!')
-            if 'ʼ' in keyword:
-                print('Тут апостроф')
 
     def cities_request(self, lang: str):
         choice = {'ua': self.cities_ua, 'en': self.cities_en}
@@ -50,8 +49,6 @@ class TestCalculate(BaseCase):
             response = requests.get(url, headers=self.auth)
             items = response.json()['items']
             self.assertIsNotNone(items, msg=f'{code}: {keyword} Не знайдено!!!')
-            if 'ʼ' in keyword:
-                print('Тут апостроф')
 
     def test_en_capitals(self):
         self.capitals_request('en')

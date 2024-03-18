@@ -5,6 +5,8 @@ from data.credentials import *
 
 class CustomRatesAuthManager:
     def __init__(self, auth_url, client_id, client_secret):
+        self.stage_url = CUSTOMRATES_STAGE
+        self.prod_url = CUSTOMRATES_PROD
         self.auth_url = auth_url
         self.client_id = client_id
         self.client_secret = client_secret

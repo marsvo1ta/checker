@@ -101,7 +101,6 @@ class TestOrder(BaseCase):
         response = requests.post(url, json=body, headers=auth)
         self.assertTrue(response.status_code == 200)
 
-
     def test_invalid_delivery_point(self):
         auth = self.auth_manager.authorization(BACK)
         body = self.create_body_json()

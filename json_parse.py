@@ -16,4 +16,4 @@ with (open('report.json', 'r') as f,
     if length == 1:
         output_file.write(f'{length} test failed: {count_failed_test[0]}')
     else:
-        output_file.write(f'{length} tests failed: {"".join(count_failed_test)}')
+        output_file.write(f'{length} tests failed: {", ".join(count_failed_test)}')

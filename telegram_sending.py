@@ -48,7 +48,8 @@ def send_telegram_sticker(bot_token, chat_id, sticker_id):
 
 with open('formatted_test_results.txt', 'r') as file:
     message = file.read()
-    count = len(message.split("\n")[0::2])
+    message_split = message.split("\n")[0::2]
+    count = len(message_split)
 
 
 if 'FAILED' in message.split():

@@ -34,9 +34,6 @@ class TestLocalities(BaseCase):
     def capitals_request(self, lang: str):
         choice = {'ua': self.keywords_ua, 'en': self.keywords_en}
         for code, keyword in zip(self.codes, choice[lang]):
-            if code in ['sg', 'tr']:
-                print(f'{code}: {keyword} Не знайдено!!!')
-                continue
             params = self.parameters(code, keyword, 1)
             response = requests.get(self.url, params=params)
             self.assertIsNotNone(response.json()['items'], msg=f'{response.request.url}')
@@ -53,9 +50,6 @@ class TestLocalities(BaseCase):
     def cities_request(self, lang: str):
         choice = {'ua': self.cities_ua, 'en': self.cities_en}
         for code, keyword in zip(self.codes, choice[lang]):
-            if code in ['sg', 'tr']:
-                print(f'{code}: {keyword} Не знайдено!!!')
-                continue
             params = self.parameters(code, keyword, 1)
             response = requests.get(self.url, params=params)
             self.assertIsNotNone(response.json()['items'], msg=f'{response.request.url}')

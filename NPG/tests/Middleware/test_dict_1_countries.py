@@ -12,8 +12,8 @@ class TestCalculate(BaseCase):
     def setUp(self):
         super().setUp()
         self.auth_manager = AuthManager()
-        self.url = f'{NPG_URL_PROD}countries'
-        self.auth = self.auth_manager.prod_admin_auth()
+        self.url: str = f'{NPG_URL_PROD}countries'
+        self.auth: dict = self.auth_manager.prod_admin_auth()
 
     def json_data(self, file_name: str):
         json_data = json_serialize(get_json_file_path(file_name, 'countries'))
@@ -21,6 +21,10 @@ class TestCalculate(BaseCase):
 
     def metadata_params(self, limit=10, offset=0):
         params = {'limit': limit, 'offset': offset}
+        return params
+
+    def filters(self, field_name, value):
+        params = {f'filter[{field_name}]': value}
         return params
 
     def get_list_request(self, params=None):
@@ -78,6 +82,26 @@ class TestCalculate(BaseCase):
         self.assertEqual(set(json_data.keys()), set(result_item.keys()))
         self.assertEqual(set(json_flag_keys), set(result_flag_keys))
         self.assertEqual(set(json_pay_keys), set(result_pay_keys))
+
+    def test_countries_filters(self):
+        filters = self.filters('code', 'FR')
+        response = self.get_list_request(filters)
+        results = response.json()['results'][0]
+
+        self.assertEqual(results['code'], 'FR')
+
+        filters = self.filters('name', 'France')
+        response = self.get_list_request(filters)
+        results = response.json()['results'][0]
+
+        self.assertEqual(results['name'], 'France')
+
+    def test_countries_multilang(self):
+        self.auth.update({'Accept-Language': 'uk'})
+        filters = self.filters('code', 'FR')
+        response = self.get_list_request(filters)
+        self.assertEqual(response.json()['results'][0]['name'], 'Франція')
+        self.assertEqual(response.json()['results'][0]['currencyFullName'], 'Євро')
 
     def test_view_country(self):
         first_country_id = self.get_list_request().json()['results'][0]['id']

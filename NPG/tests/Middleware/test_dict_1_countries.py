@@ -23,8 +23,11 @@ class TestCalculate(BaseCase):
         params = {'limit': limit, 'offset': offset}
         return params
 
+    def get_list_request(self, params=None):
+        return requests.get(self.url, params=params, headers=self.auth)
+
     def test_get_countries(self):
-        response = requests.get(self.url, headers=self.auth)
+        response = self.get_list_request()
         json_response = response.json()
         results_obj = json_response['results']
         metadata_obj = json_response['metadata']
@@ -35,27 +38,27 @@ class TestCalculate(BaseCase):
 
     def test_countries_pagination(self):
         params = self.metadata_params(1, 1)
-        response = requests.get(self.url, params, headers=self.auth)
+        response = self.get_list_request(params)
         metadata_obj = response.json()['metadata']
 
         self.assertEqual(metadata_obj['limit'], 1)
         self.assertEqual(metadata_obj['offset'], 1)
 
         params = self.metadata_params(10, metadata_obj['total'] - 1)
-        response = requests.get(self.url, params, headers=self.auth)
+        response = self.get_list_request(params)
         results_obj = response.json()['results']
 
         self.assertEqual(len(results_obj), 1)
 
         params = self.metadata_params(10, metadata_obj['total'])
-        response = requests.get(self.url, params, headers=self.auth)
+        response = self.get_list_request(params)
         results_obj = response.json()['results']
 
         self.assertEqual(len(results_obj), 0)
 
     def test_countries_fields_validation(self):
         params = self.metadata_params(1, 1)
-        response = requests.get(self.url, params, headers=self.auth)
+        response = self.get_list_request(params)
         result_item: dict = response.json()['results'][0]
         json_data: dict = self.json_data('list_response')
         json_flag_keys = json_data['flag'].keys()

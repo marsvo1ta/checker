@@ -26,6 +26,10 @@ class TestCalculate(BaseCase):
     def get_list_request(self, params=None):
         return requests.get(self.url, params=params, headers=self.auth)
 
+    def view_country_request(self, country_id):
+        url = f'{self.url}/{country_id}'
+        return requests.get(url, headers=self.auth)
+
     def test_get_countries(self):
         response = self.get_list_request()
         json_response = response.json()
@@ -61,10 +65,10 @@ class TestCalculate(BaseCase):
         response = self.get_list_request(params)
         result_item: dict = response.json()['results'][0]
         json_data: dict = self.json_data('list_response')
-        json_flag_keys = json_data['flag'].keys()
-        result_flag_keys = result_item['flag'].keys()
-        json_pay_keys = json_data['paymentSystem'].keys()
-        result_pay_keys = result_item['paymentSystem'].keys()
+        json_flag_keys: dict = json_data['flag'].keys()
+        result_flag_keys: dict = result_item['flag'].keys()
+        json_pay_keys: dict = json_data['paymentSystem'].keys()
+        result_pay_keys: dict = result_item['paymentSystem'].keys()
 
         # Delete this after deploy new fields to prod
         new_fields_placeholder = set(json_data.keys()) - set(result_item.keys())
@@ -75,4 +79,22 @@ class TestCalculate(BaseCase):
         self.assertEqual(set(json_flag_keys), set(result_flag_keys))
         self.assertEqual(set(json_pay_keys), set(result_pay_keys))
 
+    def test_view_country(self):
+        first_country_id = self.get_list_request().json()['results'][0]['id']
+        response = self.view_country_request(first_country_id)
 
+        response_data: dict = response.json()
+        json_data: dict = self.json_data('view_response')
+
+        # Delete this after deploy new fields to prod
+        new_fields_placeholder = set(json_data.keys()) - set(response_data.keys())
+        if new_fields_placeholder == {'eORIRequired', 'zipCodeExists', 'zipCodeRequired'}:
+            response_data.update({'eORIRequired': True, 'zipCodeExists': True, 'zipCodeRequired': True})
+
+        self.assertEqual(set(json_data.keys()), set(response_data.keys()))
+        self.assertEqual(len(response_data['flag']), 5)
+        self.assertEqual(len(response_data['name']), 3)
+        self.assertEqual(len(response_data['cargoRequirement']), 3)
+        self.assertEqual(len(response_data['currencyFullName']), 3)
+        self.assertEqual(len(response_data['restrictionsDescription']), 3)
+        self.assertEqual(len(response_data['paymentSystem']), 3)

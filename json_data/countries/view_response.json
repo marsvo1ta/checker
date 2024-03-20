@@ -1,0 +1,97 @@
+{
+    "id": "22b3dce0-6efa-4adf-a716-20bc33d393fd",
+    "code": "AD",
+    "name": [
+        {
+            "language": "uk",
+            "value": "Андорра"
+        },
+        {
+            "language": "en",
+            "value": "Andorra"
+        },
+        {
+            "language": "ru",
+            "value": "Андорра"
+        }
+    ],
+    "flag": {
+        "id": "ad0ab942-af4d-4820-9eef-524cd7723d8d",
+        "url": "https://d1q3li591fc5aa.cloudfront.net/6338/88f7/633888f741779572891664.png",
+        "width": 48,
+        "height": 48,
+        "mimeType": "image/png"
+    },
+    "cargoRequirement": [
+        {
+            "language": "uk",
+            "value": "<p>212</p>"
+        },
+        {
+            "language": "en",
+            "value": "<p>1</p>"
+        },
+        {
+            "language": "ru",
+            "value": "<p>32</p>"
+        }
+    ],
+    "currencyFullName": [
+        {
+            "language": "uk",
+            "value": "Євро"
+        },
+        {
+            "language": "en",
+            "value": "Euro"
+        },
+        {
+            "language": "ru",
+            "value": "Евро"
+        }
+    ],
+    "currencyShortName": "EUR",
+    "currencySign": "€",
+    "restrictionsDescription": [
+        {
+            "language": "uk",
+            "value": "<p>2123</p>"
+        },
+        {
+            "language": "en",
+            "value": "<p>1</p>"
+        },
+        {
+            "language": "ru",
+            "value": "<p>32</p>"
+        }
+    ],
+    "enabled": true,
+    "phoneCode": "376",
+    "serviceImport": true,
+    "overriddenPaymentSystemsForProviders": [],
+    "paymentSystem": {
+        "id": "aee6d304-fa3c-4bd3-b650-1eb16bcd6044",
+        "name": "Fondy",
+        "systemName": "Fondy"
+    },
+    "smsProvider": "twilio",
+    "cargosCompanyId": "Test2",
+    "cargosPayerAccountNumber": "Test1",
+    "enabledForFavoriteWarehouse": false,
+    "enabledForFavoriteAddress": false,
+    "zipCodeExists": true,
+    "zipCodeRequired": true,
+    "eORIRequired": true,
+    "editVersion": 56,
+    "createdAt": "2022-10-01T18:38:16+00:00",
+    "updatedAt": "2024-01-09T15:06:26+00:00",
+    "createdBy": {
+        "id": "65c15496-831d-49f0-83cd-9cd02926873d",
+        "email": "s.kovalyov6@gmail.com"
+    },
+    "updatedBy": {
+        "id": "9bba64f7-fa25-42b2-baff-b791d83c07af",
+        "email": "admin1@test.com"
+    }
+}

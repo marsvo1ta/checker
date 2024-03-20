@@ -8,12 +8,18 @@ bot_token = TELEGRAM_BOT_TOKEN
 chat_id = TELEGRAM_CHAT_ID
 
 
-def add_tag(tag, text):
+def add_tag(tag, text, paragraph=False):
+    if paragraph:
+        return f'<{tag}>\n{text}\n</{tag}>'
     return f'<{tag}>{text}</{tag}>'
 
 
 def bold(text):
     return add_tag('b', text)
+
+
+def code(text, paragraph=False):
+    return add_tag('pre', text, paragraph)
 
 
 def get_current_time(timezone='Europe/Kiev', format='%d.%m.%Y %H:%M:%S'):
@@ -32,7 +38,7 @@ def send_telegram_message(bot_token, chat_id, message, parse_mode='None'):
     }
     response = requests.post(url, json=payload)
     print(response.status_code)
-    return response.json() if response.status_code == 200 else response.status_code
+    return response.json() if response.status_code == 200 else (response.status_code, response.json())
 
 
 def send_telegram_sticker(bot_token, chat_id, sticker_id):
@@ -46,16 +52,23 @@ def send_telegram_sticker(bot_token, chat_id, sticker_id):
     return response
 
 
-with open('formatted_test_results.txt', 'r') as file:
+with (open('formatted_test_results.txt', 'r') as file,
+      open('assertion_errors.txt', 'r') as assertions):
     message = file.read()
     message_split = message.split("\n")[0::2]
     count = len(message_split)
+
+    assertions_file = assertions.read()
+    format_file = assertions_file.replace('<', '')
 
 
 if 'FAILED' in message.split():
     send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{message}', 'HTML')
     send_telegram_sticker(bot_token, chat_id, FAIL)
+    send_telegram_message(bot_token, chat_id, code(format_file, paragraph=True), 'HTML')
+
 else:
-    send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{bold(f"Усі тести пройшли успішно")}', 'HTML')
+    send_telegram_message(bot_token, chat_id, f'{get_current_time()}\n\n{bold(f"Усі тести пройшли успішно")}',
+                          'HTML')
     send_telegram_message(bot_token, chat_id, f'Кількість тестів: {count}')
     send_telegram_sticker(bot_token, chat_id, PASS)

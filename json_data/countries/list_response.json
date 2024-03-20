@@ -1,0 +1,29 @@
+{
+            "id": "22b3dce0-6efa-4adf-a716-20bc33d393fd",
+            "code": "AD",
+            "name": "Андорра",
+            "flag": {
+                "id": "ad0ab942-af4d-4820-9eef-524cd7723d8d",
+                "url": "https://d1q3li591fc5aa.cloudfront.net/6338/88f7/633888f741779572891664.png",
+                "width": 48,
+                "height": 48,
+                "mimeType": "image/png"
+            },
+            "enabled": true,
+            "cargoRequirement": "<p>212</p>",
+            "currencyFullName": "Євро",
+            "currencyShortName": "EUR",
+            "currencySign": "€",
+            "restrictionsDescription": "<p>2123</p>",
+            "phoneCode": "376",
+            "serviceImport": true,
+            "enabledForFavoriteWarehouse": false,
+            "enabledForFavoriteAddress": false,
+            "paymentSystem": {
+                "id": "aee6d304-fa3c-4bd3-b650-1eb16bcd6044",
+                "name": "Fondy",
+                "systemName": "Fondy"
+            },
+            "zipCodeExists": true,
+            "zipCodeRequired": true
+        }

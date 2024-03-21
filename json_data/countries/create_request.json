@@ -1,0 +1,50 @@
+{
+  "code": "WA",
+  "name": [
+    {
+      "language": "en",
+      "value": "Wakanda"
+    },
+    {
+      "language": "uk",
+      "value": "Ваканда"
+    }
+  ],
+  "cargoRequirement": [
+    {
+      "language": "en",
+      "value": "No Requirements"
+    },
+    {
+      "language": "uk",
+      "value": "Немає"
+    }
+  ],
+  "currencyFullName": [
+    {
+      "language": "en",
+      "value": "Wakandian hryvnia"
+    },
+    {
+      "language": "uk",
+      "value": "Вакандійська гривня"
+    }
+  ],
+
+  "phoneCode": "123",
+  "smsProvider": "twilio",
+  "paymentSystemId": "aee6d304-fa3c-4bd3-b650-1eb16bcd6044",
+  "currencyShortName": "EUR",
+  "currencySign": "€",
+  "restrictionsDescription": [
+    {
+      "language": "en",
+      "value": "test"
+    },
+    {
+      "language": "uk",
+      "value": "тестовий"
+    }
+  ],
+  "enabled": true
+}

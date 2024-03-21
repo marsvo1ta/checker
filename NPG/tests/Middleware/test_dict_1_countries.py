@@ -34,6 +34,14 @@ class TestCalculate(BaseCase):
         url = f'{self.url}/{country_id}'
         return requests.get(url, headers=self.auth)
 
+    def create_country_request(self, data):
+        response = requests.post(self.url, headers=self.auth, json=data)
+        return response
+
+    def delete_country_request(self, country_id):
+        url = f'{self.url}/{country_id}'
+        return requests.delete(url, headers=self.auth)
+
     def test_get_countries(self):
         response = self.get_list_request()
         json_response = response.json()
@@ -122,3 +130,29 @@ class TestCalculate(BaseCase):
         self.assertEqual(len(response_data['currencyFullName']), 3)
         self.assertEqual(len(response_data['restrictionsDescription']), 3)
         self.assertEqual(len(response_data['paymentSystem']), 3)
+
+    def test_create_country(self):
+        data = self.json_data('create_request')
+        response = self.create_country_request(data)
+        country_id = response.json()['id']
+
+        self.assertEqual(len(response.json().keys()), 24)
+        delete = self.delete_country_request(country_id)
+        self.assertEqual(delete.status_code, 204)
+
+    def test_create_country_validation(self):
+        only_code = {'code': 'WA'}
+        response = self.create_country_request(only_code)
+        required_obj: dict = response.json()['violations']['required']
+        expected_list = ['name', 'cargoRequirement', 'currencyFullName',
+                         'currencyShortName', 'currencySign', 'restrictionsDescription',
+                         'phoneCode', 'enabled', 'smsProvider']
+        for actual, expected_key in zip(required_obj, expected_list):
+            actual_key = list(actual.keys())[0]
+            self.assertEqual(expected_key, actual_key)
+
+        self.auth.update({'Accept-Language': 'uk'})
+        response = self.create_country_request(only_code)
+
+        self.assertEqual(response.json()['errorDescription'],
+                         'Ваш запит не відповідає опису JSON схеми для цього ресурсу.')

@@ -15,7 +15,7 @@ class TestCalculate(BaseCase):
         self.url: str = f'{NPG_URL_PROD}countries'
         self.auth: dict = self.auth_manager.prod_admin_auth()
 
-    def json_data(self, file_name: str):
+    def json_data(self, file_name: str) -> dict:
         json_data = json_serialize(get_json_file_path(file_name, 'countries'))
         return json_data
 
@@ -26,6 +26,10 @@ class TestCalculate(BaseCase):
     def filters(self, field_name, value):
         params = {f'filter[{field_name}]': value}
         return params
+    def search_country_request(self):
+        url = f'{self.url}/search'
+        params = {'name': 'Wakanda'}
+        return requests.get(url, params=params, headers=self.auth)
 
     def get_list_request(self, params=None):
         return requests.get(self.url, params=params, headers=self.auth)
@@ -34,8 +38,17 @@ class TestCalculate(BaseCase):
         url = f'{self.url}/{country_id}'
         return requests.get(url, headers=self.auth)
 
-    def create_country_request(self, data):
+    def create_country_request(self, data=None):
+        if not data:
+            data = self.json_data('create_request')
         response = requests.post(self.url, headers=self.auth, json=data)
+        return response
+
+    def update_country_request(self, country_id, data=None):
+        url = f'{self.url}/{country_id}'
+        if not data:
+            data = self.json_data('update_request')
+        response = requests.put(url, headers=self.auth, json=data)
         return response
 
     def delete_country_request(self, country_id):
@@ -156,3 +169,43 @@ class TestCalculate(BaseCase):
 
         self.assertEqual(response.json()['errorDescription'],
                          'Ваш запит не відповідає опису JSON схеми для цього ресурсу.')
+
+    def test_update_country(self):
+        create_response = self.create_country_request()
+        country_id = create_response.json()['id']
+        update_response = self.update_country_request(country_id)
+
+        # Delete this after deploy new fields to prod
+        if update_response.status_code == 400:
+            data = self.json_data('update_request')
+            del data['zipCodeExists']
+            del data['zipCodeRequired']
+            update_response = self.update_country_request(country_id, data)
+        json_response = update_response.json()
+        currency = json_response['currencyFullName']
+        cargo = json_response['cargoRequirement']
+        description = json_response['restrictionsDescription']
+
+        self.assertEqual(update_response.status_code, 200)
+        self.assertEqual(json_response['editVersion'], 2)
+        self.assertEqual(currency[0]['value'], 'Euro')
+        self.assertEqual(currency[1]['value'], 'Євро')
+        self.assertEqual(cargo[0]['value'], '1')
+        self.assertEqual(cargo[1]['value'], '1')
+        self.assertEqual(description[0]['value'], '1')
+        self.assertEqual(description[1]['value'], '1')
+        self.assertEqual(json_response['smsProvider'], 'esputnik')
+
+        self.delete_country_request(country_id)
+
+    def test_search_country(self):
+        create_response = self.create_country_request()
+        country_id = create_response.json()['id']
+
+        search_response = self.search_country_request()
+        self.assertEqual(len(search_response.json()[0]), 9)
+        self.assertEqual(len(search_response.json()), 1)
+        self.assertEqual(search_response.json()[0]['code'], 'WA')
+        self.assertEqual(search_response.json()[0]['name'], 'Wakanda')
+
+        self.delete_country_request(country_id)

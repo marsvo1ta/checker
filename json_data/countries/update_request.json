@@ -1,0 +1,47 @@
+{
+  "name": [
+        {
+            "language": "en",
+            "value": "Wakanda"
+        },
+        {
+            "language": "uk",
+            "value": "Ваканда"
+        }
+    ],
+     "cargoRequirement": [
+        {
+            "language": "en",
+            "value": "1"
+        },
+        {
+            "language": "uk",
+            "value": "1"
+        }
+    ],
+    "currencyFullName": [
+        {
+            "language": "en",
+            "value": "Euro"
+        },
+        {
+            "language": "uk",
+            "value": "Євро"
+        }
+    ],
+     "restrictionsDescription": [
+        {
+            "language": "en",
+            "value": "1"
+        },
+        {
+            "language": "uk",
+            "value": "1"
+        }
+    ],
+    "smsProvider": "esputnik",
+    "zipCodeExists": true,
+    "zipCodeRequired": false,
+
+    "editVersion": 1
+}

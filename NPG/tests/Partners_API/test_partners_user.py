@@ -44,7 +44,8 @@ class TestUser(BaseCase):
             "email": self.mail,
             "firstName": "Test",
             "lastName": "Test",
-            "sex": "F"}
+            "sex": "F",
+            "phone": "+380500000000"}
         auth = self.auth_manager.authorization(BACK)
         response = requests.post(self.url, json=body, headers=auth)
         self.assertEqual(response.json()['npsCid'], 'NP000541128')

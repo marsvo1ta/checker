@@ -37,8 +37,11 @@ def send_telegram_message(bot_token, chat_id, message, parse_mode='None'):
         'parse_mode': parse_mode
     }
     response = requests.post(url, json=payload)
-    print(response.status_code)
-    return response.json() if response.status_code == 200 else (response.status_code, response.json())
+    if response.status_code == 200:
+        print('success\n')
+        return response.json()
+    print(f'{response.status_code} {response.json()}')
+    return response.json()
 
 
 def send_telegram_sticker(bot_token, chat_id, sticker_id):

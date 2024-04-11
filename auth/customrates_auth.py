@@ -4,14 +4,28 @@ from data.credentials import *
 
 
 class CustomRatesAuthManager:
-    def __init__(self, auth_url, client_id, client_secret):
-        self.stage_url = CUSTOMRATES_STAGE
-        self.prod_url = CUSTOMRATES_PROD
-        self.auth_url = auth_url
-        self.client_id = client_id
-        self.client_secret = client_secret
+    def __init__(self, env):
+        self.url = None
+        self.auth_url = None
+        self.client_id = None
+        self.client_secret = None
         self.token = None
-        self.key = CUSTOMRATES_KEY_STAGE
+        self.key = None
+        self.environment(env)
+
+    def environment(self, env='stage'):
+        if env == 'stage':
+            self.url = CUSTOMRATES_STAGE
+            self.auth_url = CUSTOMRATES_AUTH_STAGE
+            self.client_id = CUSTOMRATES_CLIENT_ID_STAGE
+            self.client_secret = CUSTOMRATES_CLIENT_SECRET_STAGE
+            self.key = CUSTOMRATES_KEY_STAGE
+        else:
+            self.url = CUSTOMRATES_PROD
+            self.auth_url = CUSTOMRATES_AUTH_PROD
+            self.client_id = CUSTOMRATES_CLIENT_ID_PROD
+            self.client_secret = CUSTOMRATES_CLIENT_SECRET_PROD
+            self.key = CUSTOMRATES_KEY_PROD
 
     def get_token(self):
         response = requests.post(

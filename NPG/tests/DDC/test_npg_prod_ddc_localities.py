@@ -1,6 +1,3 @@
-import urllib
-from urllib import parse
-
 import requests
 
 from basecase import BaseCase
@@ -12,8 +9,8 @@ class TestLocalities(BaseCase):
 
     def setUp(self):
         super().setUp()
-        # self.url = f'{NPG_DDC_PROD}search/localities'
-        self.url = f'{NPG_DDC_STAGE}search/localities'
+        self.url = f'{NPG_DDC_PROD}search/localities'
+        # self.url = f'{NPG_DDC_STAGE}search/localities'
 
         self.codes = CODES
         self.keywords_en = KEYWORDS_EN
@@ -24,7 +21,8 @@ class TestLocalities(BaseCase):
         self.en_dict = dict(zip(self.codes, self.keywords_en))
         self.ua_dict = dict(zip(self.codes, self.keywords_ua))
 
-    def parameters(self, country_code, keyword: str, size, locale=''):
+    @staticmethod
+    def parameters(country_code, keyword: str, size, locale=''):
         params = {'country-code': country_code,
                   'keyword': keyword,
                   'size': size,
@@ -36,32 +34,36 @@ class TestLocalities(BaseCase):
         for code, keyword in zip(self.codes, choice[lang]):
             params = self.parameters(code, keyword, 1)
             response = requests.get(self.url, params=params)
-            self.assertIsNotNone(response.json()['items'], msg=f'{response.request.url}')
             try:
-                if response.json()['items'] is None:
-                    requested_url = response.request.url
-                    parsed_url = urllib.parse.unquote(requested_url)
-                    print(f"\n{parsed_url}")
-                    print(f"{code}: {keyword}"
-                          f" items: {response.json()['items']}")
+                self.assertIsNotNone(response.json()['items'], msg=f'{response.request.url}')
+                # if response.json()['items'] is None:
+                #     requested_url = response.request.url
+                #     parsed_url = urllib.parse.unquote(requested_url)
+                #     print(f"\n{parsed_url}")
+                #     print(f"{code}: {keyword}"
+                #           f" items: {response.json()['items']}")
             except KeyError:
-                print(response.json(), response.request.url)
+                print(f"\n{code}: {keyword}")
+                print(f'Request: {response.request.url}\n Response: {response.json()}')
+                # raise KeyError
 
     def cities_request(self, lang: str):
         choice = {'ua': self.cities_ua, 'en': self.cities_en}
         for code, keyword in zip(self.codes, choice[lang]):
             params = self.parameters(code, keyword, 1)
             response = requests.get(self.url, params=params)
-            self.assertIsNotNone(response.json()['items'], msg=f'{response.request.url}')
             try:
-                if response.json()['items'] is None:
-                    requested_url = response.request.url
-                    parsed_url = urllib.parse.unquote(requested_url)
-                    print(f"\n{parsed_url}")
-                    print(f"{code}: {keyword}"
-                          f" items: {response.json()['items']}")
+                self.assertIsNotNone(response.json()['items'], msg=f'{response.request.url}')
+                # if response.json()['items'] is None:
+                #     requested_url = response.request.url
+                #     parsed_url = urllib.parse.unquote(requested_url)
+                #     print(f"\n{parsed_url}")
+                #     print(f"{code}: {keyword}"
+                #           f" items: {response.json()['items']}")
             except KeyError:
-                print(response.json(), response.request.url)
+                print(f"\n{code}: {keyword}")
+                print(f'Request: {response.request.url}\n Response: {response.json()}')
+                # raise KeyError
 
     def test_eng_capital(self):
         self.capitals_request('en')

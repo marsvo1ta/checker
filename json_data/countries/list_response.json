@@ -25,5 +25,6 @@
                 "systemName": "Fondy"
             },
             "zipCodeExists": true,
-            "zipCodeRequired": true
+            "zipCodeRequired": true,
+            "eORIRequired": true
         }

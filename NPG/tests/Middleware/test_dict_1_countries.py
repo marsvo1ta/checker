@@ -7,7 +7,7 @@ from json_data.json_serialize import json_serialize
 from json_data.json_file_path import get_json_file_path
 
 
-class TestCalculate(BaseCase):
+class TestCountries(BaseCase):
 
     def setUp(self):
         super().setUp()
@@ -95,11 +95,6 @@ class TestCalculate(BaseCase):
         json_pay_keys: dict = json_data['paymentSystem'].keys()
         result_pay_keys: dict = result_item['paymentSystem'].keys()
 
-        # Delete this after deploy new fields to prod
-        new_fields_placeholder = set(json_data.keys()) - set(result_item.keys())
-        if new_fields_placeholder == {'zipCodeRequired', 'zipCodeExists'}:
-            result_item.update({'zipCodeRequired': True, 'zipCodeExists': True})
-
         self.assertEqual(set(json_data.keys()), set(result_item.keys()))
         self.assertEqual(set(json_flag_keys), set(result_flag_keys))
         self.assertEqual(set(json_pay_keys), set(result_pay_keys))
@@ -149,7 +144,7 @@ class TestCalculate(BaseCase):
         response = self.create_country_request(data)
         country_id = response.json()['id']
 
-        self.assertEqual(len(response.json().keys()), 24)
+        self.assertEqual(len(response.json().keys()), 27)
         delete = self.delete_country_request(country_id)
         self.assertEqual(delete.status_code, 204)
 

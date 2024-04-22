@@ -32,4 +32,4 @@ class PartnersAuth:
     def authorization(self, auth_role):
         role = {'back': self.back_token,
                 'user': self.user_token}
-        return {'Authorization': role.get(auth_role)}
+        return {'Authorization': role.get(auth_role), 'Accept': 'application/json'}

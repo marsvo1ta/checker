@@ -30,7 +30,7 @@ class TestUser(BaseCase):
         body.update(updated_fields)
 
         response = requests.post(url, json=body, headers=auth)
-        self.assertEqual(response.json()['status'], 'ok')
+        self.assertEqual(response.json().get('status'), 'ok', msg=response.json())
         self.assertEqual(response.json()['msg'], 'success')
 
         addr_response = self.user_addresses_request()['addresses']
@@ -61,7 +61,7 @@ class TestUser(BaseCase):
         response = self.user_addresses_request()['addresses'][0]
         fields = ['id', 'country', 'type', 'city', 'street',
                   'house', 'building', 'flat', 'zipcode',
-                  'comment', 'isFavorite', 'branchRef', 'cityRef']
+                  'comment', 'isFavorite', 'branchRef', 'cityRef', 'settlementRef']
         for i in response:
             self.assertIn(i, fields)
 
@@ -78,13 +78,13 @@ class TestUser(BaseCase):
             "comment": None,
             "isFavorite": True
         }
-        self.update_and_check_address(412863, body)
+        self.update_and_check_address(413117, body)
 
     def test_update_user_address_department(self):
-        body = {"branchRef": "511fd00e-e1c2-11e3-8c4a-0050568002cf"}
-        self.update_and_check_address(412857, body)
+        body = {"branchRef": "1692286e-e1c2-11e3-8c4a-0050568002cf"}
+        self.update_and_check_address(413115, body)
 
     def test_erase_fields(self):
         body = {"building": None,
                 "comment": None}
-        self.update_and_check_address(412863, body)
+        self.update_and_check_address(413117, body)

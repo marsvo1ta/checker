@@ -24,7 +24,9 @@ class TestUser(BaseCase):
 
         body = {"email": "euromobilco_unknown@gmail.com"}
         response = requests.post(url, json=body, headers=auth)
-        self.assertEqual(response.json()['message'], 'Password is missing')
+        status = response.status_code
+        self.assertEqual(200, status, msg=f'You\'ve got an error: {status}\nResponse: {response.json()}')
+        self.assertEqual(response.json().get('message'), 'Password is missing')
         self.assertEqual(response.json()['nextStep'], 'otp')
 
         body = {"email": "euromobilco_unknown@gmail.com"}
@@ -89,7 +91,9 @@ class TestUser(BaseCase):
 
         body['email'] = 'euromobilco_unknown@gmail.com'
         response = requests.post(url, json=body, headers=auth)
-        self.assertEqual(response.json()['message'], 'Set a password for the user')
+        status = response.status_code
+        self.assertEqual(200, status, msg=f'You\'ve got an error: {status}\n Response: {response.json()}')
+        self.assertEqual(response.json().get('message'), 'Set a password for the user', msg=response.json())
         self.assertEqual(response.json()['nextStep'], 'setPassword')
 
     def test_set_user_password(self):

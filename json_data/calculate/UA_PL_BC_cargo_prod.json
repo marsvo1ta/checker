@@ -1,0 +1,19 @@
+{
+  "movementVectorProductId": "be8ecd0c-be4d-4718-b2b9-bf498be3e82a",
+  "customerType": "business",
+   "cargoSpaces": [
+      {
+        "weight": 1,
+        "length": 20,
+        "width": 20,
+        "height": 20,
+        "cargoType": "cargo"
+      }
+    ],
+    "incoterms": "DAP",
+    "accountNumber": "3800131360",
+    "services": [
+
+    ]
+}
+

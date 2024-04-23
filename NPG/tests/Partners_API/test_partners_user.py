@@ -39,6 +39,18 @@ class TestUser(BaseCase):
         for key, value in updated_fields.items():
             self.assertEqual(value, result[key])
 
+    def change_email(self, body=None):
+        url = f'{self.url}/change-email'
+        auth = self.auth_manager.authorization(BACK)
+        if body is None:
+            body = {
+                "npsCid": "NP000541130",
+                "email": "marsvolta@ukr.net",
+                "newEmail": "marsvolta1@ukr.net"
+            }
+        response = requests.put(url, json=body, headers=auth)
+        return response
+
     def test_get_nps_user(self):
         body = {
             "email": self.mail,
@@ -88,3 +100,33 @@ class TestUser(BaseCase):
         body = {"building": None,
                 "comment": None}
         self.update_and_check_address(413117, body)
+
+    def test_valid_change_email(self):
+        body = {
+            "npsCid": "NP000541130",
+            "email": "marsvolta1@ukr.net",
+            "newEmail": "marsvolta@ukr.net"
+        }
+        response = self.change_email()
+        self.assertEqual('NP000541130', response.json().get('npsCid'), msg=response.json())
+
+        response = self.change_email(body)
+        self.assertEqual('NP000541130', response.json().get('npsCid'), msg=response.json())
+
+    def test_invalid_change_email(self):
+        body = {
+            "npsCid": "NP000541130",
+            "email": "marsvolta@ukr.net",
+            "newEmail": "marsvolta@ukr.net"
+        }
+        response = self.change_email(body)
+        self.assertEqual('Email already exists', response.json().get('errorDescription'))
+
+        body['npsCid'] = 'NP000541131'
+        response = self.change_email(body)
+        self.assertEqual('This email does not belong to the user.', response.json().get('errorDescription'))
+
+        body['email'] = 'marsvolta'
+        response = self.change_email(body)
+        self.assertEqual('Nothing processed', response.json().get('errorDescription'))
+

@@ -14,7 +14,8 @@ class TestApiCalculator(BaseCase):
                        'Authorization': 'Basic bnBpOiE5TXQzRXV5Y1I1NQ==',
                        'Locale': 'en'}
 
-    def calculator_json(self):
+    @staticmethod
+    def calculator_json():
         body = {
             "country": "US",
             "weight": 1.5,

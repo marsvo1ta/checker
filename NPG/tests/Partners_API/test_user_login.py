@@ -29,7 +29,6 @@ class TestUser(BaseCase):
         self.assertEqual(response.json().get('message'), 'Password is missing')
         self.assertEqual(response.json()['nextStep'], 'otp')
 
-        body = {"email": "euromobilco_unknown@gmail.com"}
         response = requests.post(url, json=body, headers=auth)
         self.assertEqual(response.json()['message'], 'OTP email has already been sent')
 
@@ -48,9 +47,9 @@ class TestUser(BaseCase):
                        'OTP code does not match']
         self.assertIn(response.json()['message'], result_list)
 
-        body['email'] = "euromobilco_unknown1@gmail.com"
+        body['email'] = "e1uromobilco_unknown1@gmail.com"
         response = requests.post(url, json=body, headers=auth)
-        self.assertEqual(response.json()['message'], 'Client not found')
+        self.assertEqual('Client not found', response.json()['message'])
 
         body['email'] = "eugmail.com"
         response = requests.post(url, json=body, headers=auth)

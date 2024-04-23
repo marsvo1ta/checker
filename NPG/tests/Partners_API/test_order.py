@@ -167,6 +167,7 @@ class TestOrder(BaseCase):
 
         body['page'] = pagination['totalPages']
         response = requests.post(url, json=body, headers=auth)
+        self.assertEqual(200, response.status_code, msg=response.json())
         count_items = len(response.json().get('items'))
         self.assertEqual(count_items, last_page_page_items)
 

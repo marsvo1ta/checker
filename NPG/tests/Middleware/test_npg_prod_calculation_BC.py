@@ -42,10 +42,10 @@ class TestCalculateBC(BaseCase):
         self.assertions(response)
         self.logs(response)
 
-    # def test_UA_US(self):
-    #     response = self.json_data('UA_US_BC_cargo_prod')
-    #     self.assertions(response)
-    #     self.logs(response)
+    def test_UA_US(self):
+        response = self.json_data('UA_US_BC_cargo_prod')
+        self.assertions(response)
+        self.logs(response)
 
     def test_UA_PL(self):
         response = self.json_data('UA_PL_BC_cargo_prod')
